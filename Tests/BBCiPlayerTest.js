@@ -2,9 +2,11 @@ const playwright = require("playwright");
 const { BBCiPlayer } = require("../PageObjects/BBCIPlayerPage");
 const assert = require("assert").strict;
 
+const browsers = ["chromium", "webkit","firefox"];
+
 (async () => {
-  for (const browserType of ["chromium", "webkit"]) {
-    const browser = await playwright["chromium"].launch({
+  for (let browserType of browsers) {
+    const browser = await playwright[browserType].launch({
       headless: false,
     });
     const context = (await browser).newContext({
@@ -22,8 +24,7 @@ const assert = require("assert").strict;
     assert.equal(page.url(), "https://www.bbc.co.uk/iplayer/guide");
     await bbcIPlayer.clickChannelMenuItem("BBC Two");
     await page.waitForLoadState("networkidle");
-    //await page.waitForNavigation({waitUntil: "networkidle"});
-    await page.screenshot({ path: `bbc2-${browserType}1.png` });
+    await page.screenshot({ path: `images/Iplayer/bbc2-${browserType}1.png` });
     var actualDate = await bbcIPlayer.getTodaysDayDate();
     var todayDate = new Date();
     var expectedDate = todayDate.getDate().toString();
@@ -35,8 +36,8 @@ const assert = require("assert").strict;
 })();
 
 (async () => {
-  for (const browserType of ["chromium", "webkit"]) {
-    const browser = await playwright["chromium"].launch({
+  for (let browserType of browsers) {
+    const browser = await playwright[browserType].launch({
       headless: false,
     });
     const context = (await browser).newContext({
@@ -54,8 +55,7 @@ const assert = require("assert").strict;
     assert.equal(page.url(), "https://www.bbc.co.uk/iplayer/guide");
     await bbcIPlayer.clickChannelMenuItem("BBC One");
     await page.waitForLoadState("networkidle");
-    //await page.waitForNavigation({waitUntil: "networkidle"});
-    await page.screenshot({ path: `bbc1-${browserType}2.png` });
+    await page.screenshot({ path: `images/Iplayer/bbc1-${browserType}1.png` });
     var actualDate = await bbcIPlayer.getTodaysDayDate();
     var todayDate = new Date();
 

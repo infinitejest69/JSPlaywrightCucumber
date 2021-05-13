@@ -1,10 +1,10 @@
-class BBCNews {
+class BBCSports {
   constructor(page) {
     this.page = page;
   }
 
   async navigate() {
-    await this.page.goto("https://www.bbc.co.uk/news");
+    await this.page.goto("https://www.bbc.co.uk/sport");
   }
 
   async getPageUrl() {
@@ -14,5 +14,9 @@ class BBCNews {
   async clickMenuItem(text) {
     await this.page.click(`text=${text}`);
   }
+
+  async getTableValue(){
+    return await this.page.innerText("//span[contains(text(),'Lewis')]");
+  }
 }
-module.exports = { BBCNews };
+module.exports = { BBCSports };

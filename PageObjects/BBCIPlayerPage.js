@@ -3,9 +3,6 @@ class BBCiPlayer {
     this.page = page;
   }
 
-  todaySelector =
-    "//div[@class='day-switcher__item__day typo--bold'][contains(text(),'Today')]/../div[2]";
-
   async navigate() {
     await this.page.goto("https://www.bbc.co.uk/iplayer");
   }
@@ -23,9 +20,7 @@ class BBCiPlayer {
   }
 
   async getTodaysDayDate() {
-    return await this.page.innerText(
-      "//div[@class='day-switcher__item__day typo--bold'][contains(text(),'Today')]/../div[2]"
-    );
+    return await this.page.innerText("//div[@class='day-switcher__item__day typo--bold'][contains(text(),'Today')]/../div[2]");
   }
 }
 module.exports = { BBCiPlayer };
